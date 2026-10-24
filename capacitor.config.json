@@ -1,0 +1,7 @@
+{
+  "appId": "com.alexis.rutinadearranque",
+  "appName": "Rutina de Arranque",
+  "webDir": "www",
+  "android": { "backgroundColor": "#C9362A" },
+  "plugins": { "LocalNotifications": { "iconColor": "#C9362A" } }
+}
