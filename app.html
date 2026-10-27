@@ -6,22 +6,25 @@
 /* Layout: una columna tipo guía de bolsillo; color de cada día = disco olímpico (rojo 25, azul 20, amarillo 15) */
 :root{
   --bg:#EDEFF0; --surface:#FFFFFF; --ink:#16191D; --muted:#5D646C; --line:#D6DADE; --far:#A3AAB1; --prop:#7C848C;
-  --d1:#C9362A; --d2:#1E5DBA; --d3:#D99A00; --on1:#FFFFFF; --on2:#FFFFFF; --on3:#16191D;
+  --d1:#C9362A; --d2:#1E5DBA; --d3:#D99A00; --d4:#2E8048; --d5:#6B4FA8; --d6:#3F464D; --on1:#FFFFFF; --on2:#FFFFFF; --on3:#16191D; --on4:#FFFFFF; --on5:#FFFFFF; --on6:#FFFFFF;
   --ok:#2E8048; --water:#2A86C9; --acc:var(--d1); --on:var(--on1);
   --display:"Saira Extra Condensed","Arial Narrow",Impact,sans-serif;
   --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#111315; --surface:#1A1D20; --ink:#E8EBED; --muted:#9BA2A9; --line:#2B3034; --far:#565D64; --prop:#7D858C;
-  --d1:#EE5547; --d2:#5A8FE8; --d3:#F2BC2C; --on1:#111315; --on2:#111315; --on3:#111315; --ok:#4CB37A; --water:#55A8E6; color-scheme:dark}}
+  --d1:#EE5547; --d2:#5A8FE8; --d3:#F2BC2C; --d4:#4CB37A; --d5:#9C82E0; --d6:#A9B1B8; --on1:#111315; --on2:#111315; --on3:#111315; --on4:#111315; --on5:#111315; --on6:#111315; --ok:#4CB37A; --water:#55A8E6; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#111315; --surface:#1A1D20; --ink:#E8EBED; --muted:#9BA2A9; --line:#2B3034; --far:#565D64; --prop:#7D858C;
-  --d1:#EE5547; --d2:#5A8FE8; --d3:#F2BC2C; --on1:#111315; --on2:#111315; --on3:#111315; --ok:#4CB37A; --water:#55A8E6; color-scheme:dark}
+  --d1:#EE5547; --d2:#5A8FE8; --d3:#F2BC2C; --d4:#4CB37A; --d5:#9C82E0; --d6:#A9B1B8; --on1:#111315; --on2:#111315; --on3:#111315; --on4:#111315; --on5:#111315; --on6:#111315; --ok:#4CB37A; --water:#55A8E6; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 60px}
 body[data-day="1"]{--acc:var(--d1);--on:var(--on1)}
 body[data-day="2"]{--acc:var(--d2);--on:var(--on2)}
 body[data-day="3"]{--acc:var(--d3);--on:var(--on3)}
+body[data-day="4"]{--acc:var(--d4);--on:var(--on4)}
+body[data-day="5"]{--acc:var(--d5);--on:var(--on5)}
+body[data-day="6"]{--acc:var(--d6);--on:var(--on6)}
 body[data-day="p"]{--acc:var(--ink);--on:var(--bg)}
 .wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
 h1,h2,h3{font-family:var(--display);text-transform:uppercase;margin:0;line-height:1;text-wrap:balance}
@@ -88,7 +91,8 @@ h3{font-size:22px;font-weight:700}
 .wdays button{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:600 14px var(--body);padding:10px 0;border-radius:10px;cursor:pointer;min-width:0}
 .wdays button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .hr{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:600;font-size:15px}
-.dtabs{display:flex;gap:8px}
+.dtabs{display:flex;gap:6px;flex-wrap:wrap}
+.dtabs button{min-width:56px}
 .dtabs button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:700 15px var(--body);padding:10px 0;border-radius:10px;cursor:pointer}
 .dtabs button[aria-pressed="true"]{border-color:var(--acc)}
 .dot{width:11px;height:11px;border-radius:50%;flex:none}
@@ -391,11 +395,39 @@ const ST={
  gemelopared:{name:"Gemelo en la pared",txt:"30 s por lado. Talón de atrás apoyado.",props:[{t:"rect",x:150,y:-15,w:7,h:196}],
   poses:[{p:[100,110],n:[118,62],h:[124,48],e:[134,70],w:[148,72],k:[118,140],a:[120,178],k2:[86,145],a2:[70,178]},{p:[104,112],n:[122,64],h:[128,50],e:[136,72],w:[148,74],k:[121,141],a:[121,178],k2:[89,146],a2:[70,178]}],dur:2.4},
 };
-const DAYS={
+const DAYS3={
  1:{t:"Pecho + Bíceps",g:["pecho","biceps"],ex:["banca","inclinado","aperturas","curl","martillo"],st:["marco","biceps","cruzado"]},
  2:{t:"Espalda + Tríceps",g:["espalda","triceps"],ex:["jalon","remo","remopolea","triceps","frances"],st:["lateral","tricepsst","nino"]},
  3:{t:"Hombro + Piernas",g:["hombro","piernas"],ex:["sentadilla","prensa","femoral","militar","laterales","gemelos"],st:["cuadri","isquios","gemelopared","cruzado"]},
 };
+// ----- divisiones según cuántos días por semana -----
+const D_=(t,g,ex)=>({t,g,ex});
+const SPLITS={
+ 1:{1:D_("Cuerpo completo",["piernas","pecho","espalda","hombro","biceps","triceps"],["sentadilla","banca","jalon","militar","curl","triceps"])},
+ 2:{1:D_("Cuerpo completo A",["piernas","pecho","espalda","hombro","abdomen"],["sentadilla","banca","remo","militar","crunch"]),
+    2:D_("Cuerpo completo B",["piernas","pecho","espalda","hombro","abdomen"],["prensa","inclinado","jalon","laterales","femoral","plancha"])},
+ 3:DAYS3,
+ 4:{1:D_("Pecho + Tríceps",["pecho","triceps"],["banca","inclinado","aperturas","triceps","frances"]),
+    2:D_("Espalda + Bíceps",["espalda","biceps"],["jalon","remo","remopolea","curl","martillo"]),
+    3:D_("Piernas",["piernas"],["sentadilla","prensa","femoral","extension","gemelos"]),
+    4:D_("Hombro + Abdomen",["hombro","abdomen"],["militar","laterales","pajaros","crunch","plancha"])},
+ 5:{1:D_("Pecho",["pecho"],["banca","inclinado","aperturas","cruces","flexiones"]),
+    2:D_("Espalda",["espalda"],["jalon","remo","remopolea","remo1","lumbares"]),
+    3:D_("Piernas",["piernas"],["sentadilla","prensa","extension","femoral","gemelos"]),
+    4:D_("Hombro",["hombro"],["militar","laterales","frontales","pajaros","encog"]),
+    5:D_("Brazos + Abdomen",["biceps","triceps","abdomen"],["curl","martillo","triceps","frances","crunch","plancha"])},
+ 6:{1:D_("Empuje A",["pecho","hombro","triceps"],["banca","inclinado","militar","laterales","triceps"]),
+    2:D_("Tirón A",["espalda","biceps"],["jalon","remo","curl","martillo","pajaros"]),
+    3:D_("Piernas A",["piernas","abdomen"],["sentadilla","prensa","femoral","gemelos","crunch"]),
+    4:D_("Empuje B",["pecho","hombro","triceps"],["inclbarra","aperturas","arnold","frontales","frances"]),
+    5:D_("Tirón B",["espalda","biceps"],["dominadas","remo1","remopolea","curlalt","encog"]),
+    6:D_("Piernas B",["piernas","abdomen"],["hack","estocadas","pmrigido","extension","gemsent","plancha"])},
+};
+const STG={pecho:["marco"],biceps:["biceps"],hombro:["cruzado"],espalda:["lateral","nino"],triceps:["tricepsst"],piernas:["cuadri","isquios","gemelopared"],abdomen:["nino"]};
+for(const n in SPLITS)for(const k in SPLITS[n]){const D=SPLITS[n][k];if(!D.st)D.st=[...new Set(D.g.flatMap(g=>STG[g]))].slice(0,4)}
+let DAYS=DAYS3;
+const dayKeys=()=>Object.keys(DAYS);
+
 
 // ================== dibujo ==================
 const NS="http://www.w3.org/2000/svg";
@@ -492,7 +524,9 @@ Object.assign(EX,{
 ["flexiones","fondosbanco","puente","crunch","plancha","elevpiernas"].forEach(id=>EX[id].casa=1);
 EX.fondosbanco.tips=[...EX.fondosbanco.tips.slice(0,2),"En casa, con una silla firme contra la pared."];
 
-const HOME={1:["flexiones","flexinc","curlmochila","plancha"],2:["remoinv","superman","fondosbanco","plancha"],3:["sentlibre","bulgara","puente","pike","lateralesbot","gemescalon"]};
+const HOME3={1:["flexiones","flexinc","curlmochila","plancha"],2:["remoinv","superman","fondosbanco","plancha"],3:["sentlibre","bulgara","puente","pike","lateralesbot","gemescalon"]};
+const HOMEG={pecho:["flexiones","flexinc"],biceps:["curlmochila"],espalda:["remoinv","superman"],triceps:["fondosbanco"],hombro:["pike","lateralesbot"],piernas:["sentlibre","bulgara","puente","gemescalon"],abdomen:["plancha","crunch"]};
+function homeFor(day){if(DAYS===DAYS3)return HOME3[day];let l=[...new Set(DAYS[day].g.flatMap(g=>HOMEG[g]))];if(l.length<4&&!l.includes("plancha"))l.push("plancha");return l.slice(0,6)}
 const ALT={banca:["inclinado","inclbarra","flexiones"],inclinado:["inclbarra","flexinc"],aperturas:["apermanc","cruces","flexiones"],curl:["curlalt","curlmochila"],martillo:["curlalt","concentrado","curlmochila"],
  jalon:["dominadas","remoinv"],remo:["remo1","remomaq","remoinv"],remopolea:["remomaq","remo1","remoinv"],triceps:["francesz","fondosbanco"],frances:["patada","francesz","fondosbanco"],
  sentadilla:["hack","bulgara","sentlibre"],prensa:["hack","bulgara"],femoral:["femsentado","pmrigido","puente"],militar:["pressbarra","arnold","pike"],laterales:["lateralesbot"],gemelos:["gemsent","gemescalon"]};
@@ -530,7 +564,15 @@ function regCustom(){for(const id in st.custom){const c=st.custom[id];
   EX[id]={custom:1,g:c.g,name:c.name,mus:GN[c.g]+" · ejercicio propio",rx:c.rx||"3 × 12",rest:+c.rest||60,nokg:!!c.nokg,
     tips:c.note?c.note.split("\n").map(limpio).filter(Boolean):["Ejercicio agregado por vos. Si tenés dudas con la técnica, pedile al profe que te lo muestre."],poses:GENERIC}}}
 regCustom();
-for(const d of["1","2","3"])st.plan[d].ids=st.plan[d].ids.filter(id=>EX[id]);
+st.plans=st.plans||{};if(!st.plans[3])st.plans[3]=st.plan;
+function applySplit(){
+  const N=Math.min(6,Math.max(1,st.days.length||3));DAYS=SPLITS[N];
+  const P=st.plans[N]=st.plans[N]||{};
+  for(const k of dayKeys()){if(!P[k])P[k]={ids:[...DAYS[k].ex],rx:{}};P[k].ids=P[k].ids.filter(id=>EX[id])}
+  st.plan=P;const ok=k=>DAYS[k]?k:"1";st.next=ok(st.next);st.rtab=ok(st.rtab);
+  for(const d in st.override)if(!DAYS[st.override[d]])delete st.override[d];
+}
+applySplit();
 // ----- peso por ejercicio -----
 function kgHist(id){const h=st.kg[id]||[];return{now:h.find(r=>r.d===today),prev:h.filter(r=>r.d!==today).pop()}}
 function commitKg(id,val){const kg=parseFloat(String(val).replace(",","."));const h=(st.kg[id]||[]).filter(r=>r.d!==today);
@@ -625,18 +667,18 @@ function waterLine(){
   w.querySelector("button").onclick=()=>addWater(1);return w;
 }
 function finish(day,home){
-  st.done[today]={day,home:!!home,n:(st.ticks[today]||[]).length};st.next=String(day%3+1);st.inGym=null;delete st.override[today];save();render();window.scrollTo({top:0});
+  st.done[today]={day,t:DAYS[day].t,home:!!home,n:(st.ticks[today]||[]).length};st.next=String(day%dayKeys().length+1);st.inGym=null;delete st.override[today];save();render();window.scrollTo({top:0});
   toast(home?"Bien ahí: rutina en casa hecha.":"Entrenamiento terminado. ¡Bien ahí!",{ms:4000});
 }
 let homeMode=false;
 function hoyView(v){
-  const now=new Date();const day=todayDay();const D=DAYS[day];const done=st.done[today];
+  const now=new Date();const done=st.done[today];const day=done?done.day:todayDay();const D=DAYS[day]||{t:done?.t||"",st:[],g:[],ex:[]};
   const gym=isGymDay()||st.override[today]||done&&!done.rest;
   const hero=document.createElement("div");hero.className="hero";v.appendChild(hero);
   if(done){
-    hero.innerHTML=`<div class="eyebrow">${WD[now.getDay()]} ${fmtD(today)}</div><h2>Día ${done.day} hecho ✓</h2><p>${done.home?"Rutina en casa.":DAYS[done.day].t+"."} La próxima vez te toca el Día ${st.next}: ${DAYS[st.next].t}.</p>`;
+    hero.innerHTML=`<div class="eyebrow">${WD[now.getDay()]} ${fmtD(today)}</div><h2>Día ${done.day} hecho ✓</h2><p>${done.home?"Rutina en casa.":(done.t||DAYS[done.day]?.t||"")+"."} La próxima vez te toca el Día ${st.next}: ${DAYS[st.next].t}.</p>`;
     v.appendChild(waterLine());
-    const s=sec(v,"Estiramiento","si no lo hiciste");DAYS[done.day].st.forEach(id=>mini(s,ST[id]));
+    const s=sec(v,"Estiramiento","si no lo hiciste");(DAYS[done.day]?.st||[]).forEach(id=>mini(s,ST[id]));
     return;
   }
   if(!gym){
@@ -650,14 +692,14 @@ function hoyView(v){
   }
   hero.innerHTML=`<div class="eyebrow">${WD[now.getDay()]} ${fmtD(today)}${st.hora?" · "+st.hora+" h":""}</div><h2>Hoy te toca Día ${day}</h2><p class="lead">${D.t}</p>`;
   const sw=document.createElement("div");sw.className="switch";sw.innerHTML=`<span>¿Otro día?</span>`;
-  ["1","2","3"].filter(d=>d!==day).forEach(d=>{const b=document.createElement("button");b.type="button";b.textContent="Día "+d;b.onclick=()=>{st.override[today]=d;save();render()};sw.appendChild(b)});
+  dayKeys().filter(d=>d!==day).forEach(d=>{const b=document.createElement("button");b.type="button";b.textContent="Día "+d;b.onclick=()=>{st.override[today]=d;save();render()};sw.appendChild(b)});
   hero.appendChild(sw);
   if(homeMode){
     const n=document.createElement("p");n.className="note";n.textContent="Rutina en casa con peso corporal para los mismos músculos. Hacé 3 vueltas o las series que dice cada uno.";v.appendChild(n);
     const back=document.createElement("button");back.type="button";back.className="ghost";back.textContent="Volver a la rutina del gym";back.onclick=()=>{homeMode=false;render()};v.appendChild(back);
     const m=sec(v,"Movilidad","5 min · antes de empezar");MOV.forEach(d=>mini(m,d));
-    v.appendChild(trainButton(day,HOME[day],true));
-    const e=sec(v,"En casa",D.t);HOME[day].forEach(id=>e.appendChild(card(id,day,{home:true})));
+    v.appendChild(trainButton(day,homeFor(day),true));
+    const e=sec(v,"En casa",D.t);homeFor(day).forEach(id=>e.appendChild(card(id,day,{home:true})));
     const s=sec(v,"Estiramiento","5 min · al terminar");D.st.forEach(id=>mini(s,ST[id]));
     const f=document.createElement("button");f.type="button";f.className="go wide";f.textContent="Hice la rutina en casa";f.onclick=()=>{homeMode=false;finish(day,true)};v.appendChild(f);
     return;
@@ -804,7 +846,7 @@ function customForm(s2,d,plan){
   f.querySelector('[data-a="cancel"]').onclick=()=>{editing=null;render()};
   const del=f.querySelector('[data-a="del"]');let armed=false;
   if(del)del.onclick=()=>{if(!armed){armed=true;del.textContent="¿Seguro? Tocá de nuevo";setTimeout(()=>{armed=false;del.textContent="Borrar"},4000);return}
-    const id=editing;delete st.custom[id];delete EX[id];delete st.kg[id];for(const k of["1","2","3"])st.plan[k].ids=st.plan[k].ids.filter(z=>z!==id);
+    const id=editing;delete st.custom[id];delete EX[id];delete st.kg[id];for(const n in st.plans)for(const k in st.plans[n])st.plans[n][k].ids=st.plans[n][k].ids.filter(z=>z!==id);
     editing=null;save();render();toast("Ejercicio borrado.",{ms:3000})};
   s2.appendChild(f);
 }
@@ -815,19 +857,19 @@ function rutinaView(v){
   const order=[1,2,3,4,5,6,0];
   p.innerHTML=`<div class="wdays">${order.map(d=>`<button type="button" data-d="${d}" aria-pressed="${st.days.includes(d)}">${WD[d].slice(0,3)}</button>`).join("")}</div>
     <label class="hr" for="hora">Hora a la que vas <input id="hora" type="time" value="${st.hora}"></label>
-    <p class="empty">Los días van rotando: si faltás, el próximo día que vayas seguís con el que te tocaba.${CAP?" Te aviso 30 minutos antes de la hora.":""}</p>`;
-  p.querySelectorAll(".wdays button").forEach(b=>b.onclick=()=>{const d=+b.dataset.d;const i=st.days.indexOf(d);if(i<0)st.days.push(d);else st.days.splice(i,1);b.setAttribute("aria-pressed",i<0);save();programarAvisos()});
+    <p class="empty">Tenés ${dayKeys().length} ${dayKeys().length===1?"rutina":"rutinas"}, una por cada día que vas. Van rotando: si faltás, el próximo día que vayas seguís con el que te tocaba.${CAP?" Te aviso 30 minutos antes de la hora.":""}</p>`;
+  p.querySelectorAll(".wdays button").forEach(b=>b.onclick=()=>{const d=+b.dataset.d;const i=st.days.indexOf(d);if(i<0)st.days.push(d);else st.days.splice(i,1);const before=dayKeys().length;applySplit();save();programarAvisos();render();if(dayKeys().length!==before)toast(`Ahora tenés ${dayKeys().length} ${dayKeys().length===1?"rutina":"rutinas"}: una por cada día que vas.`,{ms:3500})});
   p.querySelector("#hora").onchange=ev=>{st.hora=ev.target.value;save();programarAvisos()};
   s1.appendChild(p);
   const s2=sec(v,"Ejercicios","tildá los que hacés");
   const dt=document.createElement("div");dt.className="dtabs";
-  ["1","2","3"].forEach(d=>{const b=document.createElement("button");b.type="button";b.setAttribute("aria-pressed",st.rtab===d);b.innerHTML=`<i class="dot" style="background:var(--d${d})"></i>Día ${d}`;
+  dayKeys().forEach(d=>{const b=document.createElement("button");b.type="button";b.setAttribute("aria-pressed",st.rtab===d);b.innerHTML=`<i class="dot" style="background:var(--d${d})"></i>Día ${d}`;
     b.onclick=()=>{st.rtab=d;rfilter=null;editing=null;save();render()};dt.appendChild(b)});
   s2.appendChild(dt);
   const d=st.rtab;const D=DAYS[d];const plan=st.plan[d];
   const help=document.createElement("p");help.className="empty";help.textContent=`${D.t}. Si el profe te dio otras series o repeticiones, cambialas en el casillero.`;s2.appendChild(help);
   s2.appendChild(bodyMap(plan,g=>{rfilter=g;render()}));
-  for(const g of(rfilter?[rfilter]:[...D.g,"abdomen"])){
+  for(const g of(rfilter?[rfilter]:[...new Set([...D.g,...plan.ids.map(id=>EX[id].g),"abdomen"])])){
     const list=Object.keys(EX).filter(id=>EX[id].g===g).sort((a,b)=>(plan.ids.includes(b)-plan.ids.includes(a))||((EX[b].base||0)-(EX[a].base||0)));
     const box=document.createElement("div");box.className="plist";box.innerHTML=`<h4>${GN[g]}</h4>`;
     list.forEach(id=>{const x=EX[id];const on=plan.ids.includes(id);
@@ -882,7 +924,7 @@ function progView(v){
     st.bw=st.bw.filter(z=>z.d!==today);st.bw.push({d:today,kg});save();render()};
   s3.appendChild(p3);
   const s4=sec(v,"Historial","últimos entrenamientos");const p4=document.createElement("div");p4.className="panel";
-  p4.innerHTML=sd.length?`<div class="hist">${sd.slice(-10).reverse().map(d=>`<div><b>${fmtD(d)}</b><span>Día ${st.done[d].day} · ${DAYS[st.done[d].day].t}</span><span>${st.done[d].home?"En casa":"Gym"}</span></div>`).join("")}</div>`
+  p4.innerHTML=sd.length?`<div class="hist">${sd.slice(-10).reverse().map(d=>`<div><b>${fmtD(d)}</b><span>Día ${st.done[d].day} · ${st.done[d].t||DAYS[st.done[d].day]?.t||""}</span><span>${st.done[d].home?"En casa":"Gym"}</span></div>`).join("")}</div>`
     :`<p class="empty">Cuando toques "Terminé" en el gym, acá queda anotado.</p>`;
   s4.appendChild(p4);
 }
